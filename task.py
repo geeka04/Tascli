@@ -20,12 +20,16 @@ def save_file(tasks):
 # add a task
 def add_task(description):
     tasks = load_file()
-    task_id = len(tasks) + 1
+    if not tasks:
+        task_id = 1
+    else:
+        task_id = max(task['id'] for task in tasks) + 1
+
     new_task = {
         "id" : task_id,
         "description" : description,
         "status" : "to-do",
-        "createdAt" :  datetime.now().isoformat(), #fix format to add to json file.
+        "createdAt" :  datetime.now().isoformat(), 
         "updatedAt" : datetime.now().isoformat()
     }
     tasks.append(new_task)
@@ -43,6 +47,13 @@ def update_task(id, new_description):
             print("Task updated successffully")
             return
     print("Task not found")    
+
+#  delete a task 
+def delete_task(id):
+    tasks = load_file()
+    tasks = [task for task in tasks if task['id'] != int(id)]
+    save_file(tasks)
+    print("Task deleted successfuly")
 
 def main():
     if len(sys.argv) < 2:
@@ -64,9 +75,11 @@ def main():
             update_task(id, new_desc)
 
         case "delete":
-            return "two"
+            id = sys.argv[2]
+            return delete_task(id)        
+        
         case default:
-            return "Unexpected error occured. Check format"
+            return "Invalid command"
         
 if __name__ == "__main__":
     main()
