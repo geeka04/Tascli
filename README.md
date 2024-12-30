@@ -1,4 +1,4 @@
-# Taskcli : CLI TO-DO App
+# Tascli : CLI TO-DO App
 
 ## Description
 A simple command-line interface to manage your tasks.
@@ -14,6 +14,9 @@ A simple command-line interface to manage your tasks.
 - `list done`: List completed tasks.
 - `list todo`: List pending tasks.
 - `list in-progress`: List tasks that are currently in progress.
+<<<<<<< HEAD
 
 ### Prerequisites 
 python 3.10 or above
+=======
+>>>>>>> a55c54e6550926eded8af4feb43cd1f223d1b8d8
