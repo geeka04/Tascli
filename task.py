@@ -25,14 +25,18 @@ def add_task(description):
         "id" : task_id,
         "description" : description,
         "status" : "to-do",
-        "createdAt" :  datetime.now().isoformat(),
+        "createdAt" :  datetime.now().isoformat(), #fix format to add to json file.
         "updatedAt" : datetime.now().isoformat()
     }
     tasks.append(new_task)
-
     save_file(tasks)
+    print("Task added successfully")
 
 def main():
+    if len(sys.argv) < 2:
+        print("usage: task.py <command> [discription]")
+        return 
+    
     command = sys.argv[1]
     match command:
         case "add":
@@ -47,7 +51,7 @@ def main():
         case "delete":
             return "two"
         case default:
-            return "something"
+            return "Unexpected error occured. Check format"
         
 if __name__ == "__main__":
     main()
