@@ -18,5 +18,3 @@ A simple command-line interface to manage your tasks.
 
 ### Prerequisites 
 - python 3.10 or above
-=======
->>>>>>> a55c54e6550926eded8af4feb43cd1f223d1b8d8
