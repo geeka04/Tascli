@@ -1,4 +1,4 @@
-# Taskcli : CLI TO-DO App
+# Tascli : CLI TO-DO App
 
 ## Description
 A simple command-line interface to manage your tasks.
