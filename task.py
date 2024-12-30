@@ -55,6 +55,26 @@ def delete_task(id):
     save_file(tasks)
     print("Task deleted successfuly")
 
+# mark in-progress and done
+def mark_ip(id):
+    tasks = load_file()
+    for task in tasks:
+        if task['id'] == int(id):
+            task['status'] = "in-progress"
+            task['updatedAt'] = datetime.now().isoformat()
+            save_file(tasks)
+            print('updated successfully')
+
+def mark_done(id):
+    tasks = load_file()
+    for task in tasks:
+        if task['id'] == int(id):
+            task['status'] = "done"
+            task['updatedAt'] = datetime.now().isoformat()
+            save_file(tasks)
+            print('updated successfully')
+
+
 def main():
     if len(sys.argv) < 2:
         print("usage: task.py <command> [discription]")
@@ -76,7 +96,15 @@ def main():
 
         case "delete":
             id = sys.argv[2]
-            return delete_task(id)        
+            return delete_task(id)    
+
+        case "mark-in-progress":
+            id = sys.argv[2]
+            return mark_ip(id)    
+        
+        case "mark-done":
+            id = sys.argv[2]
+            return mark_done(id)    
         
         case default:
             return "Invalid command"
