@@ -14,3 +14,6 @@ A simple command-line interface to manage your tasks.
 - `list done`: List completed tasks.
 - `list todo`: List pending tasks.
 - `list in-progress`: List tasks that are currently in progress.
+
+### Prerequisites 
+python 3.10 or above
