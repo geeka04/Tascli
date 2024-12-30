@@ -32,6 +32,18 @@ def add_task(description):
     save_file(tasks)
     print("Task added successfully")
 
+# update a task
+def update_task(id, new_description):
+    tasks = load_file()
+    for task in tasks:
+        if task["id"] == int(id):
+            task["description"] = new_description
+            task["updatedAt"] = datetime.now().isoformat()
+            save_file(tasks)
+            print("Task updated successffully")
+            return
+    print("Task not found")    
+
 def main():
     if len(sys.argv) < 2:
         print("usage: task.py <command> [discription]")
@@ -47,7 +59,10 @@ def main():
             add_task(description)
 
         case "update":
-            return "one"
+            id = sys.argv[2]
+            new_desc = sys.argv[3]
+            update_task(id, new_desc)
+
         case "delete":
             return "two"
         case default:
