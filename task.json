@@ -16,8 +16,15 @@
   {
     "id": 3,
     "description": "learn how to turn on gas cylinder",
-    "status": "to-do",
+    "status": "done",
     "createdAt": "2024-12-30T15:36:40.050985",
-    "updatedAt": "2024-12-30T15:36:40.050985"
+    "updatedAt": "2024-12-30T23:22:07.655623"
+  },
+  {
+    "id": 4,
+    "description": "wake up at 7",
+    "status": "to-do",
+    "createdAt": "2024-12-30T22:39:43.923076",
+    "updatedAt": "2024-12-30T22:39:43.923076"
   }
 ]

@@ -56,31 +56,24 @@ def delete_task(id):
     print("Task deleted successfuly")
 
 # mark in-progress and done
-def mark_ip(id):
+def status(id, stat):
     tasks = load_file()
     for task in tasks:
         if task['id'] == int(id):
-            task['status'] = "in-progress"
-            task['updatedAt'] = datetime.now().isoformat()
+            task["status"] = stat
+            task["updatedAt"] = datetime.now().isoformat()
             save_file(tasks)
-            print('updated successfully')
-
-def mark_done(id):
-    tasks = load_file()
-    for task in tasks:
-        if task['id'] == int(id):
-            task['status'] = "done"
-            task['updatedAt'] = datetime.now().isoformat()
-            save_file(tasks)
-            print('updated successfully')
-
+            return
+    print("task id not found")
 
 def main():
     if len(sys.argv) < 2:
         print("usage: task.py <command> [discription]")
         return 
-    
+
     command = sys.argv[1]
+    id = sys.argv[2]
+
     match command:
         case "add":
             if len(sys.argv) < 3:
@@ -90,21 +83,17 @@ def main():
             add_task(description)
 
         case "update":
-            id = sys.argv[2]
             new_desc = sys.argv[3]
             update_task(id, new_desc)
 
         case "delete":
-            id = sys.argv[2]
-            return delete_task(id)    
-
+            return delete_task(id)     
+                
         case "mark-in-progress":
-            id = sys.argv[2]
-            return mark_ip(id)    
+            return status(id, "in-progress")
         
         case "mark-done":
-            id = sys.argv[2]
-            return mark_done(id)    
+            return status(id, "done")
         
         case default:
             return "Invalid command"
