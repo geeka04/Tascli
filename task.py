@@ -1,5 +1,8 @@
+import json
 import argparse
 from argparse import Namespace
+
+
 
 def parser_function() -> Namespace: 
     parser = argparse.ArgumentParser(description = "A cli todo app")
@@ -21,13 +24,14 @@ def parser_function() -> Namespace:
     args = parser.parse_args() 
     return args
 
-'''def handle_commands(args : Namespace) -> None:
-    #match arguments thingy '''
+def handle_commands(args : Namespace) -> None:
+    match(args.command):
+        case "add":
+            add_task(args.description)
     
 def main() -> None:
     file_path = 'task.json'
-    commands = parser_function()
-    handle_commands(commands)
+    handle_commands(parser_function())
 
 if __name__ == "__main__":
     main()
