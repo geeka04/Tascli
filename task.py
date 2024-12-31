@@ -1,8 +1,23 @@
 import json
+import os
 import argparse
 from argparse import Namespace
+from datetime import datetime
 
+task_file = "task.json"
 
+# loading the json file
+def load_file():
+    if not os.path.exists(task_file):
+        return[]
+    with open(task_file,'r') as file:
+        return json.load(file)
+
+# saving a change to json file
+def save_file(tasks):
+    with open(task_file,'w') as file:
+        json.dump(tasks, file, indent=2)
+    
 
 def parser_function() -> Namespace: 
     parser = argparse.ArgumentParser(description = "A cli todo app")
@@ -24,14 +39,33 @@ def parser_function() -> Namespace:
     args = parser.parse_args() 
     return args
 
-def handle_commands(args : Namespace) -> None:
+# add a task
+def add_task(description : str, tasks : list[dict]):
+    if not tasks:
+        task_id = 1
+    else:
+        task_id = max(task['id'] for task in tasks) + 1
+
+    new_task = {
+        "id" : task_id,
+        "description" : description,
+        "status" : "to-do",
+        "createdAt" :  datetime.now().isoformat(), 
+        "updatedAt" : datetime.now().isoformat()
+    }
+    tasks.append(new_task)
+    print("Task added successfully")
+
+def handle_commands(args : Namespace, tasks : list[dict]) -> None:
     match(args.command):
         case "add":
-            add_task(args.description)
+            add_task(args.description, tasks)
     
 def main() -> None:
-    file_path = 'task.json'
-    handle_commands(parser_function())
+    tasks : list[dict] = load_file()
+    args : Namespace = parser_function()
+    handle_commands(args, tasks)
+    save_file(tasks)
 
 if __name__ == "__main__":
     main()
