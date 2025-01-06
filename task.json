@@ -1,17 +1,17 @@
 [
   {
     "id": 1,
-    "description": "call ammoomma",
+    "description": "buy eggs",
     "status": "done",
     "createdAt": "2024-12-30T15:26:03.973342",
-    "updatedAt": "2024-12-30T22:15:15.226668"
+    "updatedAt": "2025-01-06T13:52:20.630821"
   },
   {
     "id": 2,
-    "description": "write record",
+    "description": "boil rice",
     "status": "in-progress",
     "createdAt": "2024-12-30T15:26:16.135471",
-    "updatedAt": "2024-12-30T22:04:14.890491"
+    "updatedAt": "2025-01-06T13:51:09.582657"
   },
   {
     "id": 3,

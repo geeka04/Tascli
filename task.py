@@ -29,11 +29,11 @@ def parser_function() -> Namespace:
 
     # delete sub command
     delete_parser = subparsers.add_parser('delete', help = 'delete a task')
-    delete_parser.add_argument('id', help = "id of the task to be deleted")
+    delete_parser.add_argument('id', type = int, help = "id of the task to be deleted")
 
     # update sub command
     update_parser = subparsers.add_parser('update', help = "update a task")
-    update_parser.add_argument('id', help = "id of the task")
+    update_parser.add_argument('id', type = int, help = "id of the task")
     update_parser.add_argument('new_desc', help = "description to be updated")
 
     args = parser.parse_args() 
@@ -62,7 +62,9 @@ def update_task(id : int, new_desc : str, tasks : list[dict]) -> None:
         if task['id'] == id:
             task['description'] = new_desc
             task['updatedAt'] = datetime.now().isoformat()
-    print("id not found")
+            print("Task updated successfuly")
+            return
+    print("task id not found")
 
 def handle_commands(args : Namespace, tasks : list[dict]) -> None:
     match(args.command):
