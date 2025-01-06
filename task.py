@@ -6,6 +6,7 @@ from datetime import datetime
 
 task_file = "task.json"
 
+
 # loading the json file
 def load_file():
     if not os.path.exists(task_file):
@@ -35,6 +36,13 @@ def parser_function() -> Namespace:
     update_parser = subparsers.add_parser('update', help = "update a task")
     update_parser.add_argument('id', type = int, help = "id of the task")
     update_parser.add_argument('new_desc', help = "description to be updated")
+
+    # update status
+    inprogress_parser = subparsers.add_parser('mark-in-progress', help = "update the status of a task as in-progress")
+    inprogress_parser.add_argument('id', type = int, help = "the id of the task to update its status")
+
+    done_parser = subparsers.add_parser('mark-done', help = "update status of a task as done")
+    done_parser.add_argument('id', type = int, help = "the id of the task to update its status")
 
     args = parser.parse_args() 
     return args
@@ -74,9 +82,19 @@ def delete_task(id : int, tasks: list[dict]) -> None:
             print("task deleted successfully")
             return
     print("task id not found")
+
+# mark-in-progress or mark-done
+def status_update(status : str, id : int, tasks : list[dict]) -> None :
+    for task in tasks:
+        if task['id'] == id:
+            task['status'] = status
+            task['updatedAt'] = datetime.now().isoformat()
+            print("status updated successfully")
+            return
+    print("id not found")    
             
 
-def handle_commands(args : Namespace, tasks : list[dict]) -> None:
+def handle_commands(args : Namespace, tasks : list[dict]) -> None :
     match(args.command):
         case "add":
             add_task(args.description, tasks)
@@ -84,6 +102,10 @@ def handle_commands(args : Namespace, tasks : list[dict]) -> None:
             update_task(args.id, args.new_desc, tasks)     
         case "delete":
             delete_task(args.id, tasks)   
+        case "mark-in-progress":
+            status_update("in-progress", args.id, tasks)
+        case "mark-done":
+            status_update("done", args.id, tasks)
     
 def main() -> None:
     tasks : list[dict] = load_file()
