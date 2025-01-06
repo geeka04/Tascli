@@ -66,12 +66,24 @@ def update_task(id : int, new_desc : str, tasks : list[dict]) -> None:
             return
     print("task id not found")
 
+# delete a task
+def delete_task(id : int, tasks: list[dict]) -> None:
+    for task in tasks:
+        if task['id'] == id:
+            tasks.remove(task)
+            print("task deleted successfully")
+            return
+    print("task id not found")
+            
+
 def handle_commands(args : Namespace, tasks : list[dict]) -> None:
     match(args.command):
         case "add":
             add_task(args.description, tasks)
         case "update":
-            update_task(args.id, args.new_desc, tasks)        
+            update_task(args.id, args.new_desc, tasks)     
+        case "delete":
+            delete_task(args.id, tasks)   
     
 def main() -> None:
     tasks : list[dict] = load_file()

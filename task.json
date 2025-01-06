@@ -1,12 +1,5 @@
 [
   {
-    "id": 1,
-    "description": "buy eggs",
-    "status": "done",
-    "createdAt": "2024-12-30T15:26:03.973342",
-    "updatedAt": "2025-01-06T13:52:20.630821"
-  },
-  {
     "id": 2,
     "description": "boil rice",
     "status": "in-progress",
