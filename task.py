@@ -58,13 +58,11 @@ def add_task(description : str, tasks : list[dict]) -> None:
 
 # update a task
 def update_task(id : int, new_desc : str, tasks : list[dict]) -> None:
-    if not tasks:
-        print("id not found")
     for task in tasks:
         if task['id'] == id:
             task['description'] = new_desc
             task['updatedAt'] = datetime.now().isoformat()
-    print("task updated successfully")
+    print("id not found")
 
 def handle_commands(args : Namespace, tasks : list[dict]) -> None:
     match(args.command):
