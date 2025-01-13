@@ -115,19 +115,21 @@ def list_tasks(status : str, tasks: list[dict]) -> None:
             
 
 def handle_commands(args : Namespace, tasks : list[dict]) -> None :
-    match(args.command):
-        case "add":
-            add_task(args.description, tasks)
-        case "update":
-            update_task(args.id, args.new_desc, tasks)     
-        case "delete":
-            delete_task(args.id, tasks)   
-        case "mark-in-progress":
-            status_update("in-progress", args.id, tasks)
-        case "mark-done":
-            status_update("done", args.id, tasks)
-        case "list":
-            list_tasks(args.status, tasks)
+    commands = {
+        "add": lambda: add_task(args.description, tasks),
+        "update": lambda: update_task(args.id, args.new_desc, tasks),
+        "delete": lambda: delete_task(args.id, tasks),
+        "mark-in-progress": lambda: status_update("in-progress", args.id, tasks),
+        "mark-done": lambda: status_update("done", args.id, tasks),
+        "list": lambda: list_tasks(args.status, tasks),
+    }
+
+    command = commands.get(args.command)
+    if command:
+        command()
+    else:
+        print("Invalid command!")
+
     
 def main() -> None:
     tasks : list[dict] = load_file()
