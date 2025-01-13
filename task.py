@@ -3,6 +3,7 @@ import os
 import argparse
 from argparse import Namespace
 from datetime import datetime
+from tabulate import tabulate
 
 task_file = "task.json"
 
@@ -43,6 +44,10 @@ def parser_function() -> Namespace:
 
     done_parser = subparsers.add_parser('mark-done', help = "update status of a task as done")
     done_parser.add_argument('id', type = int, help = "the id of the task to update its status")
+
+    # list tasks
+    list_parser = subparsers.add_parser('list', help = "command to list tasks")
+    list_parser.add_argument('status', nargs = '?', choices = ['to-do', 'in-progress', 'done'])
 
     args = parser.parse_args() 
     return args
@@ -92,6 +97,21 @@ def status_update(status : str, id : int, tasks : list[dict]) -> None :
             print("status updated successfully")
             return
     print("id not found")    
+
+# list tasks
+def list_tasks(status : str, tasks: list[dict]) -> None:
+    if status == None:
+            print(tabulate(tasks, headers='keys', tablefmt="grid"))
+    else:
+        status_table = [] 
+        for task in tasks:
+            if task['status'] == status:
+                status_table.append(task)
+        if status_table:
+            print(tabulate(status_table, headers='keys', tablefmt="grid"))    
+        else:
+            print(f"No task found with {status}")          
+    return
             
 
 def handle_commands(args : Namespace, tasks : list[dict]) -> None :
@@ -106,6 +126,8 @@ def handle_commands(args : Namespace, tasks : list[dict]) -> None :
             status_update("in-progress", args.id, tasks)
         case "mark-done":
             status_update("done", args.id, tasks)
+        case "list":
+            list_tasks(args.status, tasks)
     
 def main() -> None:
     tasks : list[dict] = load_file()

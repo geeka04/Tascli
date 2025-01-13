@@ -7,20 +7,6 @@
     "updatedAt": "2025-01-06T13:51:09.582657"
   },
   {
-    "id": 3,
-    "description": "learn how to turn on gas cylinder",
-    "status": "done",
-    "createdAt": "2024-12-30T15:36:40.050985",
-    "updatedAt": "2025-01-06T14:54:10.695551"
-  },
-  {
-    "id": 4,
-    "description": "wake up at 7",
-    "status": "to-do",
-    "createdAt": "2024-12-30T22:39:43.923076",
-    "updatedAt": "2024-12-30T22:39:43.923076"
-  },
-  {
     "id": 5,
     "description": "test",
     "status": "to-do",
