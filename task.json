@@ -1,16 +1,1 @@
-[
-  {
-    "id": 2,
-    "description": "boil rice",
-    "status": "in-progress",
-    "createdAt": "2024-12-30T15:26:16.135471",
-    "updatedAt": "2025-01-06T13:51:09.582657"
-  },
-  {
-    "id": 5,
-    "description": "test",
-    "status": "to-do",
-    "createdAt": "2024-12-31T21:00:06.905325",
-    "updatedAt": "2024-12-31T21:00:06.905325"
-  }
-]
+[]

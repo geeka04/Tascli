@@ -11,7 +11,9 @@ task_file = "task.json"
 # loading the json file
 def load_file():
     if not os.path.exists(task_file):
-        return[]
+        with open(task_file, 'w') as file:
+            file.write('[]')
+            
     with open(task_file,'r') as file:
         return json.load(file)
 
